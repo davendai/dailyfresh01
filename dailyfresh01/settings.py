@@ -119,4 +119,29 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# 指定静态文件所在的目录
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# 邮件发送配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'    # 导入邮件模块
+EMAIL_HOST = 'smtp.qq.com'                 # 邮箱服务器地址
+EMAIL_PORT = 465                             # 邮箱服务器端口
+EMAIL_HOST_USER = '1083717422@@qq.com'       # 发件人（天天生鲜官方邮箱账号）
+EMAIL_HOST_PASSWORD = 'davenuncle0228&*'           # 客户端授权码，非邮箱登录密码
+EMAIL_FROM = '天天生鲜<1083717422@@qq.com>'   # 打开邮件显示在‘发件人’中的签名
+
+# django项目的缓存配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": ""
+        }
+    }
+}
+
+# session数据缓存到Redis中
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
